@@ -1,0 +1,6 @@
+{
+  "name": "Bontes.cl - Ingeniería Contractual & Claims",
+  "description": "Plataforma B2B de alta conversión para Ingeniería Contractual, Gestión de Claims y Peritaje Legal-Técnico en obras civiles en Chile.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
