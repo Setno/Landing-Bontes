@@ -93,7 +93,7 @@ export const BONTES_CASE_STUDIES: CaseStudy[] = [
     recoveredAmount: '$92.500.000 CLP Recuperados / Mitigados',
     timeframe: '45 Días de Análisis y Gestión Administrativa',
     methodology: 'Time Impact Analysis (TIA) + Protocolo SCL',
-    summary: 'La Inspección Fiscal pretendía cursar multas por 60 days de retraso en la entrega de pavimentos. Demostramos mediante cronogramas As-Built que la ruta crítica estuvo bloqueada por la demora de la propia Inspección Fiscal en autorizar los cambios de diseño, no por ineficiencia de la constructora.',
+    summary: 'La Inspección Fiscal pretendía cursar multas por 60 días de retraso en la entrega de pavimentos. Demostramos mediante cronogramas As-Built que la ruta crítica estuvo bloqueada por la demora de la propia Inspección Fiscal en autorizar los cambios de diseño, no por ineficiencia de la constructora.',
     imageUrl: '/images/case_obra_vial.png',
     keyOutcomes: [
       'Liberación inmediata de retenciones en estados de pago.',
@@ -159,7 +159,7 @@ export const BONTES_METHODOLOGY_STEPS = [
   {
     step: '04',
     title: 'Estrategia de Blindaje & Defensa Negociadora',
-    desc: 'Acompañamiento en mesas directas de negociación con el mandante, inspecciones fiscales o representation técnica en procesos arbitrales.',
+    desc: 'Acompañamiento en mesas directas de negociación con el mandante, inspecciones fiscales o representación técnica en procesos arbitrales.',
     details: 'Armamos la carpeta probatoria irrefutable que obliga a la contraparte a sentarse a acordar antes de arriesgar un fallo judicial adverso.'
   }
 ];

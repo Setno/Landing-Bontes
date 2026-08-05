@@ -44,6 +44,7 @@ export interface ServiceItem {
   shortDesc: string;
   fullDesc: string;
   iconName: string;
+  imageUrl?: string;
   deliverables: string[];
   applicableTo: string[];
   roiImpact: string;
@@ -60,6 +61,7 @@ export interface CaseStudy {
   methodology: string;
   summary: string;
   keyOutcomes: string[];
+  imageUrl?: string;
 }
 
 export interface FaqItem {
