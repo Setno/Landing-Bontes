@@ -6,23 +6,15 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-[#0B132B] text-slate-300 pt-16 pb-24 md:pb-12 border-t border-[#1E293B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-[#1E293B]">
-          
+
           {/* Brand Info (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
             <BontesLogo variant="dark" size="lg" />
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm mt-3">
               Firma especializada en Ingeniería Contractual, Gestión de Claims y Blindaje Legal-Técnico para constructoras, contratistas y obras civiles en Chile.
             </p>
-            <div className="pt-2 flex items-center gap-3">
-              <span className="px-3 py-1 rounded-full bg-[#1E293B] text-[#D4B992] text-[11px] font-bold border border-[#C5A880]/30">
-                SCL Protocol Compliant
-              </span>
-              <span className="px-3 py-1 rounded-full bg-[#1E293B] text-slate-300 text-[11px] font-bold border border-slate-700">
-                Peritos CAM Santiago
-              </span>
-            </div>
           </div>
 
           {/* Quick Nav (2 cols) */}
@@ -33,7 +25,6 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs">
               <li><a href="#inicio" className="hover:text-white transition-colors">Inicio</a></li>
               <li><a href="#servicios" className="hover:text-white transition-colors">Servicios</a></li>
-              <li><a href="#metodologia" className="hover:text-white transition-colors">Metodología SCL</a></li>
               <li><a href="#calculadora" className="hover:text-white transition-colors">Calculadora Claims</a></li>
               <li><a href="#casos" className="hover:text-white transition-colors">Casos de Éxito</a></li>
               <li><a href="#nosotros" className="hover:text-white transition-colors">Nosotros</a></li>
@@ -66,19 +57,9 @@ export const Footer: React.FC = () => {
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
                 <span>
-                  <strong className="text-slate-200 block">Santiago:</strong>
-                  Av. Isidora Goyenechea 3000, Las Condes
+                  <strong className="text-slate-200 block">Santiago</strong>
                 </span>
               </div>
-
-              <div className="flex items-start gap-2 pt-1">
-                <MapPin className="w-4 h-4 text-[#C5A880] shrink-0 mt-0.5" />
-                <span>
-                  <strong className="text-slate-200 block">Antofagasta:</strong>
-                  Edificio O'Higgins, Av. Brasil 2100
-                </span>
-              </div>
-
               <div className="flex items-center gap-2 pt-2">
                 <Mail className="w-4 h-4 text-[#C5A880] shrink-0" />
                 <a href="mailto:contacto@bontes.cl" className="hover:text-white transition-colors font-mono">
