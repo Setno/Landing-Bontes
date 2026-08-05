@@ -7,6 +7,7 @@ export const BONTES_SERVICES: ServiceItem[] = [
     shortDesc: 'Reconstrucción técnico-legal de la ruta crítica mediante metodología As-Built vs. Planned para justificar extensiones de plazo y mayores gastos generales.',
     fullDesc: 'Desarrollamos reclamaciones irrefutables de tiempo y costo utilizando metodologías estandarizadas por la Society of Construction Law (SCL Protocol) y AACE International. Cuantificamos los retrasos imputables al mandante, aceleraciones no pagadas e interferencias de terceros.',
     iconName: 'ClockAlert',
+    imageUrl: '/images/service_claims_delay.png',
     deliverables: [
       'Análisis de Ventanas (Window Analysis) & Time Impact Analysis (TIA)',
       'Cuantificación de Mayores Gastos Generales (Directos e Indirectos)',
@@ -22,6 +23,7 @@ export const BONTES_SERVICES: ServiceItem[] = [
     shortDesc: 'Acompañamiento continuo durante la ejecución del proyecto para la administración de riesgos, modificaciones de obras y cartas formales con reserva de derechos.',
     fullDesc: 'Blindamos su contrato desde la licitación hasta la recepción definitiva. Prevenimos vicios en el procedimiento de notificación de hallazgos, aumentos de obra y órdenes de cambio no formalizadas, asegurando la trazabilidad probatoria necesaria.',
     iconName: 'ShieldCheck',
+    imageUrl: '/images/service_ingenieria_contractual.png',
     deliverables: [
       'Auditoría Contractual del Libro de Obras y Comunicaciones Oficiales',
       'Redacción Estratégica de Cartas de Reserva de Derechos y Reclamos Formativos',
@@ -37,6 +39,7 @@ export const BONTES_SERVICES: ServiceItem[] = [
     shortDesc: 'Dictámenes periciales independientes de alta rigurosidad científica para su presentación ante Tribunales, Paneles de Expertos o Instancias Arbitrales.',
     fullDesc: 'Nuestros informes combinan la ingeniería de detalle con la dogmática jurídica de contratos de construcción para sostener posiciones en litigios complejos y respaldar pretensiones económicas.',
     iconName: 'Gavel',
+    imageUrl: '/images/service_peritaje_judicial.png',
     deliverables: [
       'Informe Pericial Técnico-Económico de Cuantificación del Daño',
       'Defensa Presencial del Peritaje en Audiencias Arbitrales',
@@ -52,6 +55,7 @@ export const BONTES_SERVICES: ServiceItem[] = [
     shortDesc: 'Impugnación administrativa y legal de sanciones impuestas por Inspecciones Fiscales (IF) por supuestos retrasos en obras públicas.',
     fullDesc: 'Expertos en el Reglamento de Contratos de Obras Públicas (DS MOP N° 75) y normativas SERVIU. Gestionamos recursos administrativos, apelaciones ante la Dirección General de Obras Públicas y cobro de indemnizaciones por mayores permanencias.',
     iconName: 'Building2',
+    imageUrl: '/images/service_defensa_mop.png',
     deliverables: [
       'Impugnación de Multas del Libro de Obras y Resoluciones IF',
       'Demanda de Indemnización de Gastos Generales por Paralización',
@@ -67,6 +71,7 @@ export const BONTES_SERVICES: ServiceItem[] = [
     shortDesc: 'Estrategia legal y técnica para impedir la ejecución intempestiva de boletas de fiel cumplimiento e impulsar la recepción definitiva.',
     fullDesc: 'Protegemos su liquidez financiera ante la amenaza de cobro injustificado de garantías bancarias o pólizas de seguro por parte de mandantes intransigentes.',
     iconName: 'FileCheck2',
+    imageUrl: '/images/service_boletas_garantia.png',
     deliverables: [
       'Medidas Prejudiciales Provisionales para paralizar cobro de Garantías',
       'Informe Expedito de Cumplimiento de Hitos de Subsanación',
@@ -81,50 +86,53 @@ export const BONTES_SERVICES: ServiceItem[] = [
 export const BONTES_CASE_STUDIES: CaseStudy[] = [
   {
     id: 'case-mop-valparaiso',
-    title: 'Recuperación de UF 85.000 por Mayor Permanencia en Obra Vial Concesionada',
-    clientCategory: 'Constructora de Infraestructura Vial (MOP Región Valparaíso)',
-    conflictType: 'Atraso no imputable por hallazgos arqueológicos y expropiaciones tardías',
-    amountInDispute: 'UF 92.000 en Multas y Gastos Generales',
-    recoveredAmount: 'UF 85.400 Recuperadas / Mitigadas',
-    timeframe: '12 Meses de Tramitación Técnico-Legal',
+    title: 'Recuperación de $92.5 Millones por Mayor Permanencia en Obra Vial Regional',
+    clientCategory: 'Empresa Contratista Regional (MOP - Dirección de Vialidad)',
+    conflictType: 'Atraso no imputable por expropiaciones y modificaciones de trazado',
+    amountInDispute: '$120.000.000 CLP en Multas y Retenciones',
+    recoveredAmount: '$92.500.000 CLP Recuperados / Mitigados',
+    timeframe: '45 Días de Análisis y Gestión Administrativa',
     methodology: 'Time Impact Analysis (TIA) + Protocolo SCL',
-    summary: 'La Inspección Fiscal pretendía aplicar multas por 140 días de retraso en la entrega de la ruta. Bontes demostró mediante reconstrucción fotográfica y cronogramas As-Built que el camino crítico estuvo bloqueado por la demora de la Inspección Fiscal en autorizar el rescate arqueológico.',
+    summary: 'La Inspección Fiscal pretendía cursar multas por 60 days de retraso en la entrega de pavimentos. Demostramos mediante cronogramas As-Built que la ruta crítica estuvo bloqueada por la demora de la propia Inspección Fiscal en autorizar los cambios de diseño, no por ineficiencia de la constructora.',
+    imageUrl: '/images/case_obra_vial.png',
     keyOutcomes: [
-      'Liberación inmediata del 100% de retenciones aplicadas en estados de pago.',
-      'Reconocimiento de 125 días de extensión de plazo oficial.',
-      'Pago de mayores gastos generales directos por UF 42.000.'
+      'Liberación inmediata de retenciones en estados de pago.',
+      'Reconocimiento de extensión de plazo oficial.',
+      'Aprobación de mayores gastos generales directos.'
     ]
   },
   {
     id: 'case-edificacion-santiago',
-    title: 'Anulación de Multas por $450 Millones CLP en Edificación Hospitalaria',
-    clientCategory: 'Consorcio Constructora Hospitalaria (Región Metropolitana)',
-    conflictType: 'Modificaciones de especialidades no pagadas e interferencias MEP',
-    amountInDispute: '$480.000.000 CLP en multas de entrega parcial',
-    recoveredAmount: '$450.000.000 CLP Libres de multa',
-    timeframe: '5 Meses de Mediación Experta',
-    methodology: 'Windows Analysis + Informe de Interferencia MEP',
-    summary: 'El mandante exigía el pago de liquidación diferida sosteniendo que el edificio tenía retrasos por falta de personal. Se comprobó que el proyecto ejecutivo presentaba más de 300 RFI (solicitudes de información) no respondidas a tiempo, parando los trabajos de climatización y redes sanitarias.',
+    title: 'Anulación de Multas por $82 Millones en Proyecto de Edificación Pública (CESFAM)',
+    clientCategory: 'Constructora Mediana de Edificación (Región Metropolitana)',
+    conflictType: 'Modificaciones de especialidades no pagadas e interferencias de arquitectura',
+    amountInDispute: '$95.000.000 CLP en multas por entrega tardía',
+    recoveredAmount: '$82.000.000 CLP Libres de multa',
+    timeframe: '2 Meses de Acompañamiento y Mediación',
+    methodology: 'Windows Analysis + Informe de Interferencias',
+    summary: 'El mandante exigía el pago de multas argumentando que la obra tenía retrasos por falta de personal. Comprobamos rápidamente que el proyecto presentaba más de 50 RFI (solicitudes de información) no respondidas a tiempo, lo que realmente paralizó los trabajos de terminaciones y especialidades en la ruta crítica.',
+    imageUrl: '/images/case_cesfam_edificacion.png',
     keyOutcomes: [
-      'Devolución de retenes de garantía por $310M CLP.',
-      'Aprobación de 85 días adicionales sin penalizaciones.',
-      'Firma de finiquito consensuado sin ir a juicio arbitral.'
+      'Devolución de garantías y retenciones retenidas.',
+      'Aprobación de días adicionales sin penalizaciones.',
+      'Cierre del contrato sin litigios prolongados.'
     ]
   },
   {
     id: 'case-minero-antofagasta',
-    title: 'Defensa Exitosa en Arbitraje por Contrato EPCM Minero',
-    clientCategory: 'Empresa de Obras Civiles Complejas (Región de Antofagasta)',
-    conflictType: 'Terminación anticipada injustificada y retención de equipos',
-    amountInDispute: 'USD $3.800.000',
-    recoveredAmount: 'USD $3.450.000 en Indemnización Final',
-    timeframe: '14 Meses en Tribunal Arbitral Especializado',
-    methodology: 'Peritaje Técnico Integral + Análisis Contable de Daño Emergente',
-    summary: 'Frente a una gran minera privada que pretendía ejecutar la boleta de fiel cumplimiento alegando incumplimiento de plazo, Bontes presentó un informe integral que acreditó que los atrasos derivaban de la entrega tardía de la ingeniería básica por parte de la minera.',
+    title: 'Defensa Exitosa y Rescate de Garantías en Subcontrato Industrial',
+    clientCategory: 'Empresa Subcontratista de Obras Civiles y Montaje (Región de Antofagasta)',
+    conflictType: 'Amenaza de cobro de boletas de garantía por retrasos supuestos',
+    amountInDispute: '$420.000.000 CLP (Entre Garantías y Estados de Pago Retenidos)',
+    recoveredAmount: '$295.000.000 CLP en Retenciones y Garantías Rescatadas',
+    timeframe: '3 Meses de Asesoría Contractual y Negociación',
+    methodology: 'Auditoría Diagnóstica Exprés + Reclamación Formal',
+    summary: 'Frente a una empresa mandante principal que pretendía ejecutar las boletas de fiel cumplimiento para cubrir sus propias ineficiencias, presentamos una reclamación integral que acreditó que las demoras de la PYME derivaban de la entrega tardía de la ingeniería y frentes de trabajo en la ruta crítica por parte del cliente.',
+    imageUrl: '/images/case_subcontrato_industrial.png',
     keyOutcomes: [
-      'Prohibición judicial preventiva de cobrar la boleta de garantía.',
-      'Fallo arbitral favorable restituyendo costos de desmovilización.',
-      'Pago de rentabilidades esperadas de las obras no ejecutadas.'
+      'Bloqueo del cobro de boletas de garantía.',
+      'Liberación de estados de pago retenidos.',
+      'Negociación de salida anticipada sin daño patrimonial a la PYME.'
     ]
   }
 ];
@@ -151,7 +159,7 @@ export const BONTES_METHODOLOGY_STEPS = [
   {
     step: '04',
     title: 'Estrategia de Blindaje & Defensa Negociadora',
-    desc: 'Acompañamiento en mesas directas de negociación con el mandante, inspecciones fiscales o representación técnica en procesos arbitrales.',
+    desc: 'Acompañamiento en mesas directas de negociación con el mandante, inspecciones fiscales o representation técnica en procesos arbitrales.',
     details: 'Armamos la carpeta probatoria irrefutable que obliga a la contraparte a sentarse a acordar antes de arriesgar un fallo judicial adverso.'
   }
 ];
@@ -170,7 +178,7 @@ export const BONTES_FAQS: FaqItem[] = [
   {
     category: 'contratos',
     question: '¿Qué es el Protocolo SCL (Society of Construction Law) y por qué es clave?',
-    answer: 'El Protocolo SCL es el estándar internacional más prestigioso para la gestión y resolución de disputas de tiempo y costo en construcción. Proporciona principios objetivos para demostrar la relación causal entre los retrasos y el camino crítico del proyecto. Los tribunales arbitrales en Chile privilegian ampliamente los informes basados en normas SCL por su objetividad matemática e irrefutabilidad.'
+    answer: 'El Protocolo SCL es el estándar internacional más prestigioso para la gestión y resolución de disputas de tiempo y costo en construcción. Proporciona principios objetivos para demostrar la relación causal entre los retrasos y la ruta crítica del proyecto. Los tribunales arbitrales en Chile privilegian ampliamente los informes basados en normas SCL por su objetividad matemática e irrefutabilidad.'
   },
   {
     category: 'arbitraje',
@@ -178,4 +186,3 @@ export const BONTES_FAQS: FaqItem[] = [
     answer: 'Siempre recomendamos iniciar con un informe técnico y dossier de claim irrefutable para la negociación directa o mediación. En la mayoría de los casos que asumimos en Bontes, el mandante accede a un acuerdo extrajudicial favorable una vez que constata la solidez de la carpeta técnica preparativa. Si la negociación no prospera, la carpeta ya queda 100% lista para instancias arbitrales.'
   }
 ];
-
