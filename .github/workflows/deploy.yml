@@ -26,8 +26,8 @@ jobs:
 
       - name: 🔄 Create Passenger Restart File
         run: |
-          mkdir -p tmp
-          touch tmp/restart.txt
+          mkdir -p dist/tmp
+          touch dist/tmp/restart.txt
 
       - name: 📂 Sync files to cPanel
         env:
@@ -40,22 +40,11 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT || 21 }}
           protocol: ftp
-          local-dir: ./
+          local-dir: ./dist/
           server-dir: ${{ secrets.FTP_REMOTE_PATH }}
           exclude: |
             **/.git*
             **/.git*/**
-            **/node_modules/**
-            **/src/**
-            **/*.ts
-            **/tsconfig.json
-            **/vite.config.ts
-            **/server.ts
-            **/bun.lock
-            **/package-lock.json
-            **/PRD.md
-            **/TECH_STACK.md
-            **/inspiracion/**
-            **/docs/**
+
 
 # Trigger deploy: v1.0.2
