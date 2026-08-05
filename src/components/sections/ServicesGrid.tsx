@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BONTES_SERVICES } from '../../data/mockData';
 import { ServiceItem } from '../../types';
 import { ResponsiveDialog } from '../common/ResponsiveDialog';
-import { ClockAlert, ShieldCheck, Gavel, Building2, FileCheck2, ArrowRight, CheckCircle2, Award, Sparkles } from 'lucide-react';
+import { ClockAlert, ShieldCheck, Gavel, Building2, FileCheck2, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface ServicesGridProps {
   onOpenForm: () => void;
@@ -25,7 +25,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
   return (
     <section id="servicios" className="py-12 sm:py-16 bg-[#F8FAFC]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#0F172A] font-heading tracking-tight">
@@ -41,41 +41,57 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
           {BONTES_SERVICES.map((service, index) => (
             <div
               key={service.id}
-              className={`bg-white rounded-2xl p-5 sm:p-7 border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 ${
-                index >= 3 ? 'hidden md:flex' : 'flex'
-              }`}
+              className={`bg-white rounded-2xl border border-[#E2E8F0] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 overflow-hidden ${index >= 3 ? 'hidden md:flex' : 'flex'
+                }`}
             >
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#0F172A] flex items-center justify-center shadow-md">
-                    {getIcon(service.iconName)}
-                  </div>
-                </div>
-
-                <h3 className="text-lg sm:text-xl font-bold font-heading text-[#0F172A] group-hover:text-[#9B7E54] transition-colors">
-                  {service.title}
-                </h3>
-
-                <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                  {service.shortDesc}
-                </p>
-
-                {/* Key Deliverables Bullet Preview */}
-                <div className="pt-2 border-t border-[#F1F5F9] space-y-1">
-                  {service.deliverables.slice(0, 2).map((del, i) => (
-                    <div key={i} className="text-[11px] sm:text-xs text-[#0F172A] flex items-start gap-1.5 font-medium">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                      <span className="line-clamp-1">{del}</span>
+              <div>
+                {/* Photographic Service Header */}
+                {service.imageUrl && (
+                  <div className="relative h-40 w-full overflow-hidden bg-slate-900">
+                    <img
+                      src={service.imageUrl}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A]/80 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-4 w-10 h-10 rounded-xl bg-[#0F172A]/90 backdrop-blur-md flex items-center justify-center shadow-md border border-white/10">
+                      {getIcon(service.iconName)}
                     </div>
-                  ))}
+                  </div>
+                )}
+
+                <div className="p-5 sm:p-6 space-y-3">
+                  {!service.imageUrl && (
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#0F172A] flex items-center justify-center shadow-md mb-2">
+                      {getIcon(service.iconName)}
+                    </div>
+                  )}
+
+                  <h3 className="text-lg sm:text-xl font-bold font-heading text-[#0F172A] group-hover:text-[#9B7E54] transition-colors">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                    {service.shortDesc}
+                  </p>
+
+                  {/* Key Deliverables Bullet Preview */}
+                  <div className="pt-2 border-t border-[#F1F5F9] space-y-1">
+                    {service.deliverables.slice(0, 2).map((del, i) => (
+                      <div key={i} className="text-[11px] sm:text-xs text-[#0F172A] flex items-start gap-1.5 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                        <span className="line-clamp-1">{del}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="mt-6 pt-4 border-t border-[#E2E8F0] flex items-center justify-between">
+              <div className="p-5 sm:p-6 pt-0 border-t border-[#E2E8F0] flex items-center justify-between mt-auto">
                 <button
                   onClick={() => setSelectedService(service)}
-                  className="text-xs font-bold text-[#0F172A] hover:text-[#9B7E54] flex items-center gap-1 transition-colors cursor-pointer"
+                  className="text-xs font-bold text-[#0F172A] hover:text-[#9B7E54] flex items-center gap-1 transition-colors cursor-pointer mt-4"
                 >
                   <span>Ver Alcance Técnico</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -83,7 +99,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
 
                 <button
                   onClick={onOpenForm}
-                  className="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] hover:text-white text-[#0F172A] transition-colors border border-[#CBD5E1]"
+                  className="p-2 rounded-lg bg-[#F8FAFC] hover:bg-[#0F172A] hover:text-white text-[#0F172A] transition-colors border border-[#CBD5E1] mt-4"
                   title="Solicitar asesoría en este servicio"
                 >
                   <ShieldCheck className="w-4 h-4" />
@@ -102,7 +118,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
                 ¿Requiere una Estrategia Contractual a Medida?
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                Evaluamos litigios complejos, uniones temporales de empresas (UTEs), consorcios viales y arbitrajes de alta cuantía.
+                Evaluamos tu caso.
               </p>
             </div>
 
@@ -111,7 +127,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
                 onClick={onOpenForm}
                 className="w-full py-3 px-4 rounded-xl gold-gradient text-[#0F172A] font-bold text-xs hover:brightness-105 transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Solicitar Auditoría Exprés</span>
+                <span>Solicitar Auditoría Express</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -134,7 +150,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
             </p>
 
             <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#9B7E54]">Impacto en el ROI del Proyecto:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#9B7E54]">Impacto en el ROI del ROI:</span>
               <p className="text-sm font-bold text-[#0F172A]">
                 {selectedService.roiImpact}
               </p>

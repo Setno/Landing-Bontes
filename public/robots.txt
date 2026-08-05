@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://bontes.cl/sitemap.xml

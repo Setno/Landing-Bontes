@@ -6,12 +6,12 @@ interface RoiCalculatorProps {
   onApplyToForm: (metrics: CalculatorMetrics) => void;
 }
 
-const UF_VALUE_CLP = 38500; // Value of 1 UF in CLP for estimation
+const UF_VALUE_CLP = 40000; // Value of 1 UF in CLP for estimation
 
 export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) => {
   // Slider states
-  const [projectAmountMillions, setProjectAmountMillions] = useState<number>(2500); // Default 2,500M CLP ($2.5B)
-  const [delayDays, setDelayDays] = useState<number>(45); // Default 45 days
+  const [projectAmountMillions, setProjectAmountMillions] = useState<number>(1200); // Default 1,200M CLP ($1.2B)
+  const [delayDays, setDelayDays] = useState<number>(25); // Default 25 days
   const [dailyGGThousands, setDailyGGThousands] = useState<number>(1800); // Default 1.8M CLP / day
   const [projectType, setProjectType] = useState<string>('mop_vial');
 
@@ -19,14 +19,14 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
   const metrics = useMemo<CalculatorMetrics>(() => {
     const projectAmountCLP = projectAmountMillions * 1000000;
     const dailyGGCLP = dailyGGThousands * 1000;
-    
+
     // Liquidated damages / Fine calculation: Standard Chilean contract penalty is 1 per mil (0.1%) per day of delay
     const dailyPenaltyRate = projectType === 'mop_vial' ? 0.001 : 0.0008;
     const estimatedDailyFine = Math.min(projectAmountCLP * dailyPenaltyRate, 12000000); // capped daily fine
     const maxPenaltyCap = projectAmountCLP * 0.10; // Capped at 10% of total contract
-    
+
     const grossFineCLP = Math.min(estimatedDailyFine * delayDays, maxPenaltyCap);
-    
+
     // Probability of fine mitigation based on SCL protocol analysis (typically 85% - 95% mitigable)
     const calculatedMitigationCLP = grossFineCLP * 0.90;
 
@@ -77,8 +77,15 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-[#E2E8F0] overflow-hidden" id="calculadora">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] p-5 sm:p-7 text-white">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="relative bg-gradient-to-r from-[#0F172A] via-[#1E293B] to-[#0F172A] p-5 sm:p-7 text-white overflow-hidden">
+        {/* Engineering Pattern Overlay */}
+        <img
+          src="/images/hero_engineering_bg.png"
+          alt="Engineering pattern overlay"
+          className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none mix-blend-luminosity"
+        />
+
+        <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-xl sm:text-2xl font-bold font-heading text-white">
               Calculadora de Claims & Protección de Utilidad
@@ -91,13 +98,12 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
           <div className="shrink-0 bg-white/10 backdrop-blur-md p-3.5 rounded-xl border border-white/10 text-right">
             <span className="text-xs text-slate-300 uppercase tracking-widest block font-medium">Nivel de Riesgo Contrato</span>
             <span
-              className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold uppercase ${
-                metrics.riskLevel === 'Crítico'
-                  ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
-                  : metrics.riskLevel === 'Alto'
+              className={`inline-block mt-1 px-3 py-1 rounded-full text-xs font-bold uppercase ${metrics.riskLevel === 'Crítico'
+                ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40'
+                : metrics.riskLevel === 'Alto'
                   ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
                   : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-              }`}
+                }`}
             >
               Riesgo {metrics.riskLevel}
             </span>
@@ -117,13 +123,13 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
               {Object.entries(projectTypeLabels).map(([key, label]) => (
                 <button
                   key={key}
+                  id={`btn-calc-project-${key}`}
                   type="button"
                   onClick={() => setProjectType(key)}
-                  className={`p-3 text-left rounded-xl text-xs font-semibold transition-all border ${
-                    projectType === key
-                      ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-md'
-                      : 'bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1]'
-                  }`}
+                  className={`p-3 text-left rounded-xl text-xs font-semibold transition-all border ${projectType === key
+                    ? 'bg-[#0F172A] text-white border-[#0F172A] shadow-md'
+                    : 'bg-white text-[#475569] border-[#E2E8F0] hover:border-[#CBD5E1]'
+                    }`}
                 >
                   {label}
                 </button>
@@ -138,22 +144,23 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
                 <DollarSign className="w-4 h-4 text-[#C5A880]" /> Monto Total del Proyecto / Obra
               </span>
               <span className="text-base font-black text-[#0F172A] font-mono bg-[#F1F5F9] px-2.5 py-1 rounded-lg border border-[#E2E8F0]">
-                ${(projectAmountMillions / 1000).toFixed(1)}.000M CLP
+                ${(projectAmountMillions).toFixed(0)}M CLP
               </span>
             </div>
             <input
               type="range"
-              min={200}
-              max={15000}
-              step={100}
+              id="slider-calc-project-amount"
+              min={10}
+              max={2000}
+              step={10}
               value={projectAmountMillions}
               onChange={(e) => setProjectAmountMillions(Number(e.target.value))}
               className="w-full h-2 bg-[#E2E8F0] rounded-lg appearance-none cursor-pointer accent-[#C5A880]"
             />
             <div className="flex justify-between text-[11px] text-[#64748B] mt-1.5">
-              <span>$200M CLP</span>
-              <span>$5.000M CLP</span>
-              <span>$15.000M+ CLP</span>
+              <span>$10M CLP</span>
+              <span>$1.000M CLP</span>
+              <span>$2.000M+ CLP</span>
             </div>
           </div>
 
@@ -169,6 +176,7 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
             </div>
             <input
               type="range"
+              id="slider-calc-delay-days"
               min={10}
               max={180}
               step={5}
@@ -195,6 +203,7 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
             </div>
             <input
               type="range"
+              id="slider-calc-daily-overhead"
               min={300}
               max={12000}
               step={100}
@@ -269,6 +278,7 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
             {/* Action Trigger */}
             <div className="mt-5 pt-4 border-t border-[#E2E8F0]">
               <button
+                id="btn-calc-request-peritaje"
                 onClick={() => onApplyToForm(metrics)}
                 className="w-full py-4 bg-[#0F172A] text-white font-bold uppercase text-xs tracking-widest hover:bg-black transition-colors rounded-lg cursor-pointer flex items-center justify-center gap-2 group shadow-md"
               >
@@ -277,7 +287,7 @@ export const RoiCalculator: React.FC<RoiCalculatorProps> = ({ onApplyToForm }) =
               </button>
               <p className="text-[10px] text-center text-[#64748B] mt-2 flex items-center justify-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                Diagnóstico inicial confidencial sin compromiso. Respuesta en &lt; 2h.
+                Diagnóstico inicial confidencial sin compromiso. Respuesta en menos de 24hrs.
               </p>
             </div>
           </div>
