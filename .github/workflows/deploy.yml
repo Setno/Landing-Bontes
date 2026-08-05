@@ -1,0 +1,57 @@
+name: 🚀 Deploy to cPanel (Node.js App)
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy & Restart App
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Project
+        run: npm run build
+
+      - name: 🔄 Create Passenger Restart File
+        run: |
+          mkdir -p tmp
+          touch tmp/restart.txt
+
+      - name: 📂 Sync files to cPanel
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.SFTP_SERVER }}
+          username: ${{ secrets.SFTP_USERNAME }}
+          password: ${{ secrets.SFTP_PASSWORD }}
+          port: ${{ secrets.SFTP_PORT || 22 }}
+          protocol: sftp
+          local-dir: ./
+          server-dir: ${{ secrets.SFTP_REMOTE_PATH }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/src/**
+            **/*.ts
+            **/tsconfig.json
+            **/vite.config.ts
+            **/server.ts
+            **/bun.lock
+            **/package-lock.json
+            **/PRD.md
+            **/TECH_STACK.md
+            **/inspiracion/**
+            **/docs/**
