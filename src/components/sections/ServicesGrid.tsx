@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BONTES_SERVICES } from '../../data/mockData';
 import { ServiceItem } from '../../types';
 import { ResponsiveDialog } from '../common/ResponsiveDialog';
-import { ClockAlert, ShieldCheck, Gavel, Building2, FileCheck2, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ClockAlert, ShieldCheck, Gavel, Building2, FileCheck2, ArrowRight, CheckCircle2, Award, Sparkles } from 'lucide-react';
 
 interface ServicesGridProps {
   onOpenForm: () => void;
@@ -62,7 +62,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
 
                 <div className="p-5 sm:p-6 space-y-3">
                   {!service.imageUrl && (
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#0F172A] flex items-center justify-center shadow-md mb-2">
+                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#0F172A] flex items-center justify-center shadow-md mb-2">
                       {getIcon(service.iconName)}
                     </div>
                   )}
@@ -150,7 +150,7 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
             </p>
 
             <div className="p-4 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0] space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#9B7E54]">Impacto en el ROI del ROI:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#9B7E54]">Impacto en el ROI del Proyecto:</span>
               <p className="text-sm font-bold text-[#0F172A]">
                 {selectedService.roiImpact}
               </p>

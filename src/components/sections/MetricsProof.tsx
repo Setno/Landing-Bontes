@@ -63,57 +63,80 @@ export const MetricsProof: React.FC<MetricsProofProps> = ({ onOpenForm }) => {
           </div>
 
           {/* Active Case Study Detail Card (8 cols) */}
-          <div className="lg:col-span-8 bg-white rounded-2xl p-6 sm:p-8 border border-[#E2E8F0] shadow-xl flex flex-col justify-between space-y-6">
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E2E8F0] pb-4">
-                <div>
-                  <span className="text-xs font-bold uppercase text-[#9B7E54]">Categoría de Conflicto:</span>
-                  <h3 className="text-lg font-bold text-[#0F172A]">{currentCase.conflictType}</h3>
+          <div className="lg:col-span-8 bg-white rounded-2xl border border-[#E2E8F0] shadow-xl flex flex-col justify-between overflow-hidden">
+            <div>
+              {/* Project High Resolution Banner */}
+              {currentCase.imageUrl && (
+                <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-900">
+                  <img
+                    key={currentCase.id}
+                    src={currentCase.imageUrl}
+                    alt={currentCase.title}
+                    className="w-full h-full object-cover animate-fade-in transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent" />
+                  <div className="absolute bottom-4 left-4 right-4 text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded bg-[#C5A880] text-[#0F172A] inline-block mb-1.5 shadow">
+                      {currentCase.clientCategory}
+                    </span>
+                    <h3 className="text-base sm:text-xl font-bold font-heading leading-tight drop-shadow-md">
+                      {currentCase.title}
+                    </h3>
+                  </div>
                 </div>
-                <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-mono text-xs font-bold border border-emerald-200">
-                  {currentCase.recoveredAmount}
-                </span>
-              </div>
+              )}
 
-              {/* Grid Metrics */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0]">
-                  <span className="text-[10px] uppercase font-bold text-[#64748B] block">Monto en Disputa</span>
-                  <span className="text-sm font-bold text-[#0F172A] font-mono">{currentCase.amountInDispute}</span>
+              <div className="p-6 sm:p-8 space-y-4">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E2E8F0] pb-4">
+                  <div>
+                    <span className="text-xs font-bold uppercase text-[#9B7E54]">Categoría de Conflicto:</span>
+                    <h4 className="text-base font-bold text-[#0F172A]">{currentCase.conflictType}</h4>
+                  </div>
+                  <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-mono text-xs font-bold border border-emerald-200">
+                    {currentCase.recoveredAmount}
+                  </span>
                 </div>
-                <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0]">
-                  <span className="text-[10px] uppercase font-bold text-[#64748B] block">Duración Proceso</span>
-                  <span className="text-sm font-bold text-[#0F172A]">{currentCase.timeframe}</span>
-                </div>
-                <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] col-span-2 sm:col-span-1">
-                  <span className="text-[10px] uppercase font-bold text-[#64748B] block">Metodología Aplicada</span>
-                  <span className="text-xs font-bold text-[#9B7E54]">{currentCase.methodology}</span>
-                </div>
-              </div>
 
-              {/* Summary text */}
-              <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
-                {currentCase.summary}
-              </p>
+                {/* Grid Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0]">
+                    <span className="text-[10px] uppercase font-bold text-[#64748B] block">Monto en Disputa</span>
+                    <span className="text-sm font-bold text-[#0F172A] font-mono">{currentCase.amountInDispute}</span>
+                  </div>
+                  <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0]">
+                    <span className="text-[10px] uppercase font-bold text-[#64748B] block">Duración Proceso</span>
+                    <span className="text-sm font-bold text-[#0F172A]">{currentCase.timeframe}</span>
+                  </div>
+                  <div className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] col-span-2 sm:col-span-1">
+                    <span className="text-[10px] uppercase font-bold text-[#64748B] block">Metodología Aplicada</span>
+                    <span className="text-xs font-bold text-[#9B7E54]">{currentCase.methodology}</span>
+                  </div>
+                </div>
 
-              {/* Outcomes Bullet List */}
-              <div className="space-y-2 pt-2">
-                <span className="text-xs font-bold uppercase text-[#0F172A]">Resultados Clave Obtenidos:</span>
-                <div className="space-y-1.5">
-                  {currentCase.keyOutcomes.map((outcome, i) => (
-                    <div key={i} className="text-xs sm:text-sm text-[#0F172A] font-medium flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                      <span>{outcome}</span>
-                    </div>
-                  ))}
+                {/* Summary text */}
+                <p className="text-xs sm:text-sm text-[#475569] leading-relaxed">
+                  {currentCase.summary}
+                </p>
+
+                {/* Outcomes Bullet List */}
+                <div className="space-y-2 pt-2">
+                  <span className="text-xs font-bold uppercase text-[#0F172A]">Resultados Clave Obtenidos:</span>
+                  <div className="space-y-1.5">
+                    {currentCase.keyOutcomes.map((outcome, i) => (
+                      <div key={i} className="text-xs sm:text-sm text-[#0F172A] font-medium flex items-start gap-2">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                        <span>{outcome}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 border-t border-[#E2E8F0] flex justify-end">
+            <div className="p-6 sm:p-8 pt-0 flex justify-end">
               <button
                 onClick={onOpenForm}
-                className="py-3 px-6 rounded-xl gold-gradient text-[#0F172A] font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-md flex items-center gap-2 cursor-pointer"
+                className="py-3 px-6 rounded-xl gold-gradient text-[#0F172A] font-bold text-xs sm:text-sm hover:brightness-105 transition-all shadow-md flex items-center gap-2 cursor-pointer mt-4"
               >
                 <span>Evaluar Caso Similar en Mi Empresa</span>
                 <ArrowRight className="w-4 h-4" />

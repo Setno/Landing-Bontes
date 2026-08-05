@@ -16,7 +16,7 @@ export const PainPoints: React.FC<PainPointsProps> = ({ onOpenForm, onScrollToCa
       question: '¿Su mandante le pretende aplicar multas diarias por retrasos causados por entregas tardías de terreno, RFI sin responder o interferencias de terceros?',
       problem: 'Las Inspecciones Fiscales (IF) o Mandantes Privados aplican descuentos automáticos en los estados de pago mensuales sin considerar la ruta crítica real.',
       impact: 'Pérdida inmediata de liquidez, retención indebida de utilidades y daño al historial de cumplimiento de la constructora.',
-      solution: 'Reconstrucción forense del programa Gantt As-Built (Protocolo SCL). Aislamos cada evento disruptivo y demostramos que el camino crítico estuvo bloqueado por el mandante.'
+      solution: 'Reconstrucción forense del programa Gantt As-Built (Protocolo SCL). Aislamos cada evento disruptivo y demostramos que la ruta crítica estuvo bloqueada por el mandante.'
     },
     {
       title: 'Aumentos de Obra & Gastos Generales No Pagados',
