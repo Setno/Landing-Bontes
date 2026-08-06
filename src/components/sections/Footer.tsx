@@ -69,7 +69,7 @@ export const Footer: React.FC = () => {
 
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C5A880] shrink-0" />
-                <span className="font-mono">+56 2 2987 6543</span>
+                <span className="font-mono">+56 9 6786 7984</span>
               </div>
             </div>
           </div>

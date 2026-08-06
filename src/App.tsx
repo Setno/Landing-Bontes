@@ -129,7 +129,7 @@ export default function App() {
         subtitle={
           selectedMetrics
             ? `Valores inyectados desde calculadora (${selectedMetrics.delayDays} días | $${(selectedMetrics.totalProtectedCLP / 1000000).toFixed(1)}M CLP)`
-            : 'Un perito de ruta crítica revisará la carpeta de su proyecto en < 2 horas.'
+            : 'Un perito de ruta crítica revisará la carpeta de su proyecto en < 48 horas.'
         }
       >
         <LeadCaptureForm

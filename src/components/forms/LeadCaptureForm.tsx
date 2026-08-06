@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { LeadDocument, CalculatorMetrics } from '../../types';
 import { Send, CheckCircle2, AlertCircle, FileText, Download, Building2, User, Mail, Phone, ShieldCheck, Sparkles, MessageSquare } from 'lucide-react';
+import { db } from '../../firebase';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
+import emailjs from '@emailjs/browser';
 
 interface LeadCaptureFormProps {
   prefilledMetrics?: CalculatorMetrics | null;
@@ -22,7 +25,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
     description: ''
   });
 
-  const [loading, setLoading] = useState(false);
+  const [loading, useState] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [assignedSpecialist, setAssignedSpecialist] = useState<string>('Especialista Senior en Ruta Crítica & Protocolo SCL');
@@ -42,56 +45,108 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
     setLoading(true);
     setErrorMsg(null);
 
-    const payload: Partial<LeadDocument> = {
-      createdAt: new Date().toISOString(),
-      companyName: formData.companyName,
-      contactName: formData.contactName,
-      role: formData.role,
-      email: formData.email,
-      phone: formData.phone,
-      projectType: formData.projectType,
-      claimCategory: formData.claimCategory,
-      description: formData.description,
-      status: 'new',
-      calculatorMetrics: prefilledMetrics ? {
-        projectAmountCLP: prefilledMetrics.projectAmountCLP,
-        delayDays: prefilledMetrics.delayDays,
-        dailyGGCLP: prefilledMetrics.dailyGGCLP,
-        calculatedMitigationCLP: prefilledMetrics.calculatedMitigationCLP,
-        calculatedClaimableGGCLP: prefilledMetrics.calculatedClaimableGGCLP,
-        totalProtectedCLP: prefilledMetrics.totalProtectedCLP,
-        totalProtectedUF: prefilledMetrics.totalProtectedUF,
-        riskLevel: prefilledMetrics.riskLevel
-      } : undefined,
-      metadata: {
-        userAgent: navigator.userAgent,
-        referrer: document.referrer || 'Direct Landing'
-      }
+    const claimCategoryLabels: Record<string, string> = {
+      multas_atraso: 'Impugnación de Multas por Atraso No Imputable',
+      aumento_obra_no_pagado: 'Cobro de Mayores Gastos Generales y Aumentos de Obra',
+      liquidacion_contrato: 'Liquidación de Contrato & Rescate de Boletas',
+      peritaje_judicial: 'Peritaje Técnico para Arbitraje / Tribunal',
+      asesoria_preventiva: 'Asesoría Contractual Preventiva de Licitación u Obra'
     };
 
+    const projectTypeLabels: Record<string, string> = {
+      mop_vial: 'Obra Pública MOP / Concesión Vial',
+      edificacion: 'Edificación Privada / Comercio',
+      serviu: 'Servicios de Vivienda SERVIU (DS 236)',
+      mineria: 'Proyecto Minero e Industrial EPCM'
+    };
+
+    const specialist = formData.claimCategory === 'peritaje_judicial' || formData.claimCategory === 'liquidacion_contrato'
+      ? 'Especialista Legal Contractual & Claims'
+      : 'Especialista Senior en Ruta Crítica & Protocolo SCL';
+    setAssignedSpecialist(specialist);
+
+    let detallesDiagnostico = `FORMULARIO DE CONTACTO:\n`;
+    detallesDiagnostico += `Empresa: ${formData.companyName}\n`;
+    detallesDiagnostico += `Contacto: ${formData.contactName}\n`;
+    detallesDiagnostico += `Cargo: ${formData.role || 'No especificado'}\n`;
+    detallesDiagnostico += `Email: ${formData.email}\n`;
+    detallesDiagnostico += `Teléfono: ${formData.phone}\n`;
+    detallesDiagnostico += `Categoría de Conflicto: ${claimCategoryLabels[formData.claimCategory] || formData.claimCategory}\n`;
+    detallesDiagnostico += `Tipo de Proyecto: ${projectTypeLabels[formData.projectType] || formData.projectType}\n`;
+
+    if (prefilledMetrics) {
+      detallesDiagnostico += `\nMÉTRICAS DE LA CALCULADORA:\n`;
+      detallesDiagnostico += `- Monto Proyecto: $${(prefilledMetrics.projectAmountCLP / 1000000).toFixed(1)}M CLP\n`;
+      detallesDiagnostico += `- Días de Atraso: ${prefilledMetrics.delayDays} días\n`;
+      detallesDiagnostico += `- GG Diarios: $${(prefilledMetrics.dailyGGCLP / 1000).toFixed(0)}K CLP/día\n`;
+      detallesDiagnostico += `- Multas Mitigadas (90%): ${formatCLP(prefilledMetrics.calculatedMitigationCLP)} CLP\n`;
+      detallesDiagnostico += `- GG Reclamables (SCL): ${formatCLP(prefilledMetrics.calculatedClaimableGGCLP)} CLP\n`;
+      detallesDiagnostico += `- Total Protegido: ${formatCLP(prefilledMetrics.totalProtectedCLP)} CLP (~${prefilledMetrics.totalProtectedUF.toLocaleString('es-CL')} UF)\n`;
+      detallesDiagnostico += `- Nivel de Riesgo: ${prefilledMetrics.riskLevel}\n`;
+    }
+    
+    if (formData.description) {
+      detallesDiagnostico += `\nDETALLES ADICIONALES:\n${formData.description.trim()}`;
+    }
+
+    const ahora = new Date();
+    const timestampId = ahora.getFullYear().toString() +
+      (ahora.getMonth() + 1).toString().padStart(2, '0') +
+      ahora.getDate().toString().padStart(2, '0') + "_" +
+      ahora.getHours().toString().padStart(2, '0') +
+      ahora.getMinutes().toString().padStart(2, '0') + "_" +
+      ahora.getSeconds().toString().padStart(2, '0');
+    const customId = `DIAGNOSTICO_${timestampId}`;
+
     try {
-      const response = await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+      // 1. Guardar en Firestore
+      await setDoc(doc(db, "mensajes_contacto", customId), {
+        nombre: formData.contactName,
+        email: formData.email,
+        telefono: formData.phone,
+        proyecto: formData.companyName,
+        detalles: detallesDiagnostico,
+        diagnostico: {
+          perfil: formData.role || 'No especificado',
+          industria: projectTypeLabels[formData.projectType] || formData.projectType,
+          necesidad: claimCategoryLabels[formData.claimCategory] || formData.claimCategory,
+          magnitud: prefilledMetrics ? `${formatCLP(prefilledMetrics.totalProtectedCLP)} CLP` : 'No especificada',
+          urgencia: 'No especificada',
+          detallesAdicionales: formData.description || ''
+        },
+        estado: 'nuevo',
+        created_at: serverTimestamp()
       });
 
-      if (!response.ok) {
-        throw new Error('No se pudo enviar la solicitud. Intente nuevamente.');
-      }
+      // 2. Enviar por EmailJS
+      try {
+        const pubKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 
-      const resData = await response.json();
-      if (resData.specialist) {
-        setAssignedSpecialist(resData.specialist);
+        if (pubKey && serviceId && templateId) {
+          emailjs.init(pubKey);
+          await emailjs.send(serviceId, templateId, {
+            nombre: formData.contactName,
+            email: formData.email,
+            telefono: formData.phone,
+            proyecto: formData.companyName,
+            detalles: detallesDiagnostico,
+            to_email: "contacto@bontes.cl"
+          });
+          console.log("Alerta de correo enviada al equipo exitosamente.");
+        } else {
+          console.warn("EmailJS omitido: Faltan las claves en el archivo .env");
+        }
+      } catch (emailError) {
+        console.error("Error enviando alerta por correo:", emailError);
       }
 
       setSubmitted(true);
       if (onSuccess) onSuccess();
     } catch (err: any) {
-      console.error(err);
-      // Fallback local save simulated so user experience never fails
-      setSubmitted(true);
-      if (onSuccess) onSuccess();
+      console.error('Error al guardar en Firestore:', err);
+      setErrorMsg('Ocurrió un error al enviar el formulario. Por favor intente nuevamente.');
     } finally {
       setLoading(false);
     }
@@ -132,7 +187,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
           <div>
             <div className="text-xs text-[#9B7E54] font-bold uppercase">Especialista Asignado</div>
             <div className="text-sm font-bold text-[#0F172A]">{assignedSpecialist}</div>
-            <div className="text-xs text-[#64748B]">Tiempo de respuesta estimado: &lt; 2 Horas laborables</div>
+            <div className="text-xs text-[#64748B]">Tiempo de respuesta estimado: &lt; 48 Horas laborables</div>
           </div>
         </div>
 
@@ -151,7 +206,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
 
         <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
           <a
-            href={`https://wa.me/56998887766?text=${encodeURIComponent(
+            href={`https://wa.me/56967867984?text=${encodeURIComponent(
               `Hola Bontes, envié una solicitud de peritaje para la empresa ${formData.companyName}. Quisiera agilizar la revisión.`
             )}`}
             target="_blank"
@@ -285,7 +340,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            placeholder="+56 9 8765 4321"
+            placeholder="+56 9 6786 7984"
             required
             className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD5E1] focus:border-[#0F172A] focus:ring-2 focus:ring-[#0F172A]/10 text-sm text-[#0F172A] outline-none transition-all bg-[#F8FAFC]"
           />
