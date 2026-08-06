@@ -24,17 +24,17 @@ jobs:
       - name: 📝 Create env file
         run: |
           cat << 'EOF' > .env
-          VITE_FIREBASE_API_KEY="AIzaSyCwik4s19juSR8BBW7MzuHyXbE38kYZvZA"
-          VITE_FIREBASE_AUTH_DOMAIN="bontes-cmr.firebaseapp.com"
-          VITE_FIREBASE_PROJECT_ID="bontes-cmr"
-          VITE_FIREBASE_STORAGE_BUCKET="bontes-cmr.firebasestorage.app"
-          VITE_FIREBASE_MESSAGING_SENDER_ID="551504920212"
-          VITE_FIREBASE_APP_ID="1:551504920212:web:b1ae7ba9fda97f34877e81"
-          VITE_FIREBASE_MEASUREMENT_ID="G-V0ZT2S6SRG"
+          VITE_FIREBASE_API_KEY="${{ secrets.VITE_FIREBASE_API_KEY }}"
+          VITE_FIREBASE_AUTH_DOMAIN="${{ secrets.VITE_FIREBASE_AUTH_DOMAIN }}"
+          VITE_FIREBASE_PROJECT_ID="${{ secrets.VITE_FIREBASE_PROJECT_ID }}"
+          VITE_FIREBASE_STORAGE_BUCKET="${{ secrets.VITE_FIREBASE_STORAGE_BUCKET }}"
+          VITE_FIREBASE_MESSAGING_SENDER_ID="${{ secrets.VITE_FIREBASE_MESSAGING_SENDER_ID }}"
+          VITE_FIREBASE_APP_ID="${{ secrets.VITE_FIREBASE_APP_ID }}"
+          VITE_FIREBASE_MEASUREMENT_ID="${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}"
           
-          VITE_EMAILJS_SERVICE_ID="service_6cz93w9"
-          VITE_EMAILJS_TEMPLATE_ID="template_3ucokpm"
-          VITE_EMAILJS_PUBLIC_KEY="_AYCd29TknHVK3c-s"
+          VITE_EMAILJS_SERVICE_ID="${{ secrets.VITE_EMAILJS_SERVICE_ID }}"
+          VITE_EMAILJS_TEMPLATE_ID="${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}"
+          VITE_EMAILJS_PUBLIC_KEY="${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}"
           EOF
 
       - name: 🏗️ Build Project
