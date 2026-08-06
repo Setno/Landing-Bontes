@@ -63,4 +63,4 @@ jobs:
             **/.git*/**
 
 
-# Trigger deploy: v1.0.3
+# Trigger deploy: v1.0.4
