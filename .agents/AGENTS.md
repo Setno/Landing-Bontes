@@ -26,7 +26,9 @@ Este archivo documenta las instrucciones, estructura de trabajo y decisiones té
 - Los estilos globales y configuración de colores de la marca están en `tailwind.config.js` y `src/index.css`.
 
 ## 5. Seguridad y Variables de Entorno
-- **EmailJS y Firebase:** Las credenciales (API Keys) viven en el cliente y son públicas. Para asegurar que la compilación en GitHub Actions funcione correctamente, `deploy.yml` inyecta dinámicamente el archivo `.env`.
-- **Restricciones de Dominio (Vital):** Las claves públicas están restringidas al dominio en la consola de Google Cloud (`bontes.cl`, `localhost`) y en el Dashboard de EmailJS ("Allowed Origins").
-- **Reglas de Firestore:** La colección `mensajes_contacto` tiene reglas de seguridad configuradas para permitir solo escrituras (`allow create: if true;`) y bloquear las lecturas externas (`allow read: if false;`), previniendo filtraciones de datos.
-- **Git y MCP:** Como el directorio local de trabajo puede no estar sincronizado con Git, los commits automatizados deben realizarse a través del servidor MCP de GitHub hacia el repositorio `Setno/Landing-Bontes`.
+- **EmailJS y Firebase (Variables en GitHub Secrets):** Las variables de entorno (`VITE_FIREBASE_*` y `VITE_EMAILJS_*`) se administran como *Repository Secrets* en GitHub Actions. El flujo `deploy.yml` genera el archivo `.env` en el runner antes de compilar (`npm run build`).
+- **Inicialización Tolerante a Fallos:** `src/firebase.ts` cuenta con un bloque `try/catch` y validación de `apiKey` para evitar que un fallo en las credenciales colapse el sitio web en tiempo de ejecución.
+- **Restricciones de Dominio:** Las claves públicas están restringidas al dominio en la consola de Google Cloud (`bontes.cl`, `localhost`) y en el Dashboard de EmailJS ("Allowed Origins").
+- **Reglas de Firestore:** La colección `mensajes_contacto` permite escrituras públicas (`allow create: if true;`) y bloquea lecturas externas (`allow read: if false;`).
+- **Despliegue FTP & cPanel:** `deploy.yml` cuenta con un `timeout: 60000` (60s) en `FTP-Deploy-Action` para prevenir bloqueos por límite de tasa de cPanel al realizar despliegues consecutivos.
+- **MCP de GitHub:** Los commits automatizados deben realizarse a través del servidor MCP de GitHub hacia el repositorio `Setno/Landing-Bontes` en la rama `main`.
