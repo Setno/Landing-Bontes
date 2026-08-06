@@ -100,23 +100,27 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
 
     try {
       // 1. Guardar en Firestore
-      await setDoc(doc(db, "mensajes_contacto", customId), {
-        nombre: formData.contactName,
-        email: formData.email,
-        telefono: formData.phone,
-        proyecto: formData.companyName,
-        detalles: detallesDiagnostico,
-        diagnostico: {
-          perfil: formData.role || 'No especificado',
-          industria: projectTypeLabels[formData.projectType] || formData.projectType,
-          necesidad: claimCategoryLabels[formData.claimCategory] || formData.claimCategory,
-          magnitud: prefilledMetrics ? `${formatCLP(prefilledMetrics.totalProtectedCLP)} CLP` : 'No especificada',
-          urgencia: 'No especificada',
-          detallesAdicionales: formData.description || ''
-        },
-        estado: 'nuevo',
-        created_at: serverTimestamp()
-      });
+      if (db) {
+        await setDoc(doc(db, "mensajes_contacto", customId), {
+          nombre: formData.contactName,
+          email: formData.email,
+          telefono: formData.phone,
+          proyecto: formData.companyName,
+          detalles: detallesDiagnostico,
+          diagnostico: {
+            perfil: formData.role || 'No especificado',
+            industria: projectTypeLabels[formData.projectType] || formData.projectType,
+            necesidad: claimCategoryLabels[formData.claimCategory] || formData.claimCategory,
+            magnitud: prefilledMetrics ? `${formatCLP(prefilledMetrics.totalProtectedCLP)} CLP` : 'No especificada',
+            urgencia: 'No especificada',
+            detallesAdicionales: formData.description || ''
+          },
+          estado: 'nuevo',
+          created_at: serverTimestamp()
+        });
+      } else {
+        console.warn("Firestore omitido: La base de datos no está inicializada.");
+      }
 
       // 2. Enviar por EmailJS
       try {
