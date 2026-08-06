@@ -25,7 +25,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
     description: ''
   });
 
-  const [loading, useState] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [assignedSpecialist, setAssignedSpecialist] = useState<string>('Especialista Senior en Ruta Crítica & Protocolo SCL');
