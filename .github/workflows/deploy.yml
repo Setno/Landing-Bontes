@@ -58,9 +58,10 @@ jobs:
           protocol: ftp
           local-dir: ./dist/
           server-dir: ${{ secrets.FTP_REMOTE_PATH }}
+          timeout: 60000
           exclude: |
             **/.git*
             **/.git*/**
 
 
-# Trigger deploy: v1.0.4
+# Trigger deploy: v1.0.5
