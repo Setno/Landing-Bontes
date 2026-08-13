@@ -11,3 +11,4 @@ coverage/
 inspiracion/
 *_payload.json
 payload.json
+package-lock.json
