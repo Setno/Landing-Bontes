@@ -46,7 +46,7 @@ export const CtaBanner: React.FC<CtaBannerProps> = ({ onOpenForm, onScrollToCalc
         </div>
 
         <div className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-slate-400">
-          <span>Respuesta garantizada en menos de 2 horas</span>
+          <span>Respuesta Personalizada </span>
           <span>•</span>
           <span>Resguardo de Secreto Profesional</span>
           <span>•</span>
