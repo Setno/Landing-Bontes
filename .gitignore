@@ -6,3 +6,8 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# Archivos de pruebas y desarrollo local
+inspiracion/
+*_payload.json
+payload.json
