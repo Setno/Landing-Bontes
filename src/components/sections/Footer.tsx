@@ -80,6 +80,7 @@ export const Footer: React.FC = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <div>
             © {new Date().getFullYear()} Bontes.cl — Ingeniería Contractual & Peritaje Legal-Técnico. Todos los derechos reservados.
+            <span className="sr-only">Representante Legal / Titular: Sergio Gerardo Bontes Tamayo</span>
           </div>
           <div className="flex items-center gap-4">
             <a href="#inicio" className="hover:text-slate-300 transition-colors">Términos de Servicio</a>
