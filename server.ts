@@ -60,7 +60,7 @@ app.post('/api/diagnose', async (req, res) => {
       const ai = new GoogleGenAI({ apiKey });
       const response = await ai.models.generateContent({
         model: 'gemini-2.5-flash',
-        contents: `Eres un perito experto en Ingeniería Contractual y Derecho de la Construcción en Chile especializado en el Protocolo SCL (Society of Construction Law) y el Reglamento de Contratos de Obras Públicas del MOP (DS 75).
+        contents: `Eres un perito experto en Ingeniería Contractual, Gestión y Administración de Contratos, Reclamos Contractuales y Presupuestos de Obras en Chile, especializado en el Protocolo SCL (Society of Construction Law).
 Analiza brevemente el siguiente caso planteado por una empresa constructora y devuelve un JSON estricto con la siguiente estructura:
 {
   "riskLevel": "Riesgo Crítico / Alto / Moderado",

@@ -31,7 +31,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenForm, onScrollToCalculator }) 
 
             {/* Subheadline */}
             <p className="text-base sm:text-lg text-[#475569] leading-relaxed max-w-xl font-normal">
-              Protegemos su flujo de caja e ingeniería de contratos en proyectos de alta complejidad mediante análisis de ruta crítica (<strong className="text-[#0F172A]">SCL Protocol</strong>) y peritaje legal-técnico.
+              Protegemos su flujo de caja en <strong className="text-[#0F172A]">gestión de contratos, presupuestos y reclamos contractuales</strong> mediante análisis forense de ruta crítica (<strong className="text-[#0F172A]">SCL Protocol</strong>) y peritajes técnicos en Chile.
             </p>
 
             {/* Key Metric Indicators */}
@@ -75,7 +75,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenForm, onScrollToCalculator }) 
             <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#475569]">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Análisis As-Built vs. Planned (SCL Protocol)</span>
+                <span>Gestión y Administración Contractual</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Reclamos & Análisis As-Built (SCL Protocol)</span>
               </div>
             </div>
           </div>

@@ -29,10 +29,10 @@ export const ServicesGrid: React.FC<ServicesGridProps> = ({ onOpenForm }) => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#0F172A] font-heading tracking-tight">
-            Ingeniería Contractual, Claims & Blindaje Legal-Técnico
+            Gestión de Contratos, Reclamos Contractuales & Peritajes
           </h2>
           <p className="text-xs sm:text-sm text-[#475569]">
-            Soluciones metodológicas irrefutables diseñadas para defender la utilidad y el flujo de caja en proyectos de infraestructura, edificación y minería.
+            Soluciones técnicas irrefutables diseñadas para proteger presupuestos de obras, defender la utilidad y asegurar el flujo de caja en proyectos de construcción en Chile.
           </p>
         </div>
 

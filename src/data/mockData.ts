@@ -30,7 +30,7 @@ export const BONTES_SERVICES: ServiceItem[] = [
       'Análisis de Reajustes Polinómicos y Variación de Precios de Insumos',
       'Matriz de Alerta Temprana de Hitos Contractuales'
     ],
-    applicableTo: ['Contratistas MOP (DS 75)', 'SERVIU (DS 236)', 'Contratos EPC / EPCM Privados', 'Subcontratistas Especializados'],
+    applicableTo: ['Contratistas y Mandantes de Obras', 'Proyectos Públicos y Habitacionales', 'Contratos EPC / EPCM Privados', 'Subcontratistas Especializados'],
     roiImpact: 'Evita pérdidas de derechos por caducidad de plazos procesales contractuales.'
   },
   {
@@ -46,14 +46,14 @@ export const BONTES_SERVICES: ServiceItem[] = [
       'Contraperitajes y Contradicción de Informes de la Contraparte',
       'Análisis Causal de Fallas Estructurales o Vicios del Proyecto'
     ],
-    applicableTo: ['Tribunales Arbitrales de Construcción', 'Juicios Ordinarios de Mayor Cuantía', 'Paneles de Concesiones MOP', 'Mediaciones Privadas'],
+    applicableTo: ['Tribunales Arbitrales de Construcción', 'Juicios Ordinarios de Mayor Cuantía', 'Paneles Técnicos de Concesiones', 'Mediaciones Privadas'],
     roiImpact: 'Sustento metodológico riguroso para fundamentar fallos o acuerdos favorables.'
   },
   {
     id: 'defensa-multas-mop',
-    title: 'Defensa de Multas & Cobro de Gastos Generales (MOP / SERVIU)',
-    shortDesc: 'Impugnación administrativa y legal de sanciones impuestas por Inspecciones Fiscales (IF) por supuestos retrasos en obras públicas.',
-    fullDesc: 'Expertos en el Reglamento de Contratos de Obras Públicas (DS MOP N° 75) y normativas SERVIU. Gestionamos recursos administrativos, apelaciones ante la Dirección General de Obras Públicas y cobro de indemnizaciones por mayores permanencias.',
+    title: 'Defensa de Multas & Cobro de Gastos Generales (Obras Públicas y Privadas)',
+    shortDesc: 'Impugnación administrativa y técnica de sanciones impuestas por Inspecciones Fiscales y Técnicas por supuestos retrasos en obras.',
+    fullDesc: 'Expertos en administración y gestión de contratos de obras públicas, infraestructura y edificación. Gestionamos recursos técnicos y administrativos, apelaciones ante mandantes y cobro de indemnizaciones por mayores permanencias.',
     iconName: 'Building2',
     imageUrl: '/images/service_defensa_mop.png',
     deliverables: [
@@ -172,8 +172,8 @@ export const BONTES_FAQS: FaqItem[] = [
   },
   {
     category: 'mop_serviu',
-    question: '¿Cómo nos defiende Bontes frente a multas aplicadas por la Inspección Fiscal del MOP (DS 75)?',
-    answer: 'Bontes realiza un análisis forense de la ruta crítica del proyecto bajo la metodología SCL. Demostramos formalmente que las demoras no son imputables a su empresa (ej. entregas tardías de terreno, modificaciones de trazado, hallazgos no previstos o falta de respuesta a RFIs). Presentamos recursos administrativos fundados ante la Dirección General de Obras Públicas e impulsamos la restitución de retenciones.'
+    question: '¿Cómo nos defiende Bontes frente a multas aplicadas por la Inspección Fiscal o Mandante?',
+    answer: 'Bontes realiza un análisis forense de la ruta crítica del proyecto bajo la metodología SCL. Demostramos formalmente que las demoras no son imputables a su empresa (ej. entregas tardías de terreno, modificaciones de trazado, hallazgos no previstos o falta de respuesta a RFIs). Presentamos recursos fundados e impulsamos la restitución de retenciones en estados de pago.'
   },
   {
     category: 'contratos',
