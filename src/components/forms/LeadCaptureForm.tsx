@@ -244,7 +244,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
 
         <div className="pt-2 flex flex-col gap-3 justify-center">
           <a
-            href={`https://wa.me/56967867984?text=${encodeURIComponent(
+            href={`https://wa.me/56948030737?text=${encodeURIComponent(
               `Hola Bontes, envié una solicitud de diagnóstico técnico para ${formData.companyName || formData.contactName} (${selectedCategoryObj?.title || 'Contrato'}). Quisiera agilizar la revisión.`
             )}`}
             target="_blank"
@@ -425,7 +425,7 @@ export const LeadCaptureForm: React.FC<LeadCaptureFormProps> = ({
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              placeholder="+56 9 6786 7984"
+              placeholder="+56 9 4803 0737"
               required
               className="w-full px-3.5 py-2.5 rounded-xl border border-[#CBD5E1] focus:border-[#0F172A] focus:ring-2 focus:ring-[#0F172A]/10 text-sm text-[#0F172A] outline-none transition-all bg-[#F8FAFC]"
             />
