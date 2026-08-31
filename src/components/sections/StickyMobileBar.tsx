@@ -30,7 +30,7 @@ export const StickyMobileBar: React.FC<StickyMobileBarProps> = ({
         </button>
 
         <a
-          href="https://wa.me/56948030737?text=Hola%20Bontes,%20quisiera%20agendar%20un%20diagn%C3%B3stico%20expres%20para%20mi%20empresa."
+          href="https://wa.me/56948030734?text=Hola%20Bontes,%20quisiera%20agendar%20un%20diagn%C3%B3stico%20expres%20para%20mi%20empresa."
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm"
